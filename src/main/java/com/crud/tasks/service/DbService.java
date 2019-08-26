@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -14,7 +15,11 @@ public class DbService {
     @Autowired
     private TaskRepository repository;
 
-    public List<Task> getAllTasks(){
+    public List<Task> getAllTasks() {
         return repository.findAll();
+    }
+
+    public Optional<Task> getTaskById(final Long taskId) {
+        return repository.findById(taskId);
     }
 }
