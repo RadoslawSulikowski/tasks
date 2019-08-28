@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/v1/task")
 public class TaskController {
@@ -29,13 +30,11 @@ public class TaskController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
-    public void deleteTask(@RequestParam Long taskId) {
+    public void deleteTask(@RequestParam Long taskId) throws TaskNotFoundException {
         try {
             service.deleteTask(taskId);
-            System.out.println("Task deleted!");
-
         } catch(Exception e) {
-            System.out.println("Ups... Something went wrong, and Task wasn't deleted: " + e.toString());
+            throw new TaskNotFoundException();
         }
     }
 
