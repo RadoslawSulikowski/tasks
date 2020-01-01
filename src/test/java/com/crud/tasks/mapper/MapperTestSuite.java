@@ -15,7 +15,7 @@ public class MapperTestSuite {
     @Test
     public void testMapToCard() {
         //Given
-        TrelloCardDto cardDto = new TrelloCardDto("card1", "desc.1", "pos.1.","1");
+        TrelloCardDto cardDto = new TrelloCardDto("card1", "desc.1", "pos.1.", "1");
         //When
         TrelloCard card = mapper.mapToCard(cardDto);
         //Then
@@ -28,7 +28,7 @@ public class MapperTestSuite {
     @Test
     public void testMapToCardDto() {
         //Given
-        TrelloCard card = new TrelloCard("card1", "desc.1", "pos.1.","1");
+        TrelloCard card = new TrelloCard("card1", "desc.1", "pos.1.", "1");
         //When
         TrelloCardDto cardDto = mapper.mapToCardDto(card);
         //Then

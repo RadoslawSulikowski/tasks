@@ -25,7 +25,7 @@ public class TrelloService {
     @Autowired
     AdminConfig adminConfig;
 
-    public List<TrelloBoardDto> fetchTrelloBoard() {
+    public List<TrelloBoardDto> fetchTrelloBoards() {
         return trelloClient.getTrelloBoards();
     }
 

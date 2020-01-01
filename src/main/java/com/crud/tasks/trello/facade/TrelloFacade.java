@@ -13,18 +13,18 @@ import java.util.List;
 public class TrelloFacade {
 
     @Autowired
-    TrelloService trelloService;
+    private TrelloService trelloService;
 
     @Autowired
-    TrelloMapper trelloMapper;
+    private TrelloMapper trelloMapper;
 
     @Autowired
-    TrelloValidator trelloValidator;
+    private TrelloValidator trelloValidator;
 
     public List<TrelloBoardDto> fetchTrelloBoards() {
-        List<TrelloBoard> trelloBoards = trelloMapper.mapToBoards(trelloService.fetchTrelloBoard());
+        List<TrelloBoard> trelloBoards = trelloMapper.mapToBoards(trelloService.fetchTrelloBoards());
         List<TrelloBoard> filteredBoards = trelloValidator.validateBoards(trelloBoards);
-        return trelloMapper.mapToBoardsDto(trelloBoards);
+        return trelloMapper.mapToBoardsDto(filteredBoards);
     }
 
     public CreatedTrelloCardDto createCard(final TrelloCardDto trelloCardDto) {
