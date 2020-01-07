@@ -30,8 +30,7 @@ public class EmailScheduler {
         return "Currently in database you got : " + size + ((size == 1) ? " task" : " tasks");
     }
 
-    //@Scheduled(cron = "0 0 10 * * *")
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(cron = "0 0 10 * * *")
     private void sendInformationEmail() {
         emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT, createMessage(), mailCreatorService));
     }
