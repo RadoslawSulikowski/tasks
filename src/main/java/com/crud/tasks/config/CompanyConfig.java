@@ -32,6 +32,10 @@ public class CompanyConfig {
     @Value("${info.app.owner.surname}")
     private String ownerSurname;
 
+    public String getAddress() {
+        return String.format("%1$s %2$s", companyAddressStreet, companyAddressNumber);
+    }
+
     public String getOwner() {
         return String.format("%1$s %2$s", ownerName, ownerSurname);
     }
