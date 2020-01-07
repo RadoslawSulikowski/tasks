@@ -1,4 +1,4 @@
-package com.crud.tasks.service;
+package com.crud.tasks.service.mail;
 
 import com.crud.tasks.domain.Mail;
 import org.slf4j.Logger;
@@ -19,15 +19,12 @@ public class SimpleEmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    @Autowired
-    private MailCreatorService mailCreatorService;
-
     private MimeMessagePreparator createMimeMessage(final Mail mail) {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getReceiverEmail());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+            messageHelper.setText(mail.getText(), true);
         };
     }
 

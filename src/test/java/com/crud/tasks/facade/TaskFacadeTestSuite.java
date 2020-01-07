@@ -76,7 +76,7 @@ public class TaskFacadeTestSuite {
     }
 
     @Test
-    public void  shouldReturnUpdatedTask() {
+    public void shouldReturnUpdatedTask() {
         //Given
         TaskDto taskDto = new TaskDto(TEST_TASK_ID, TEST_TASK_TITLE, TEST_TASK_CONTENT);
         Task task = new Task(TEST_TASK_ID, TEST_TASK_TITLE, TEST_TASK_CONTENT);
