@@ -4,7 +4,6 @@ import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.config.CompanyConfig;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.facade.TaskFacade;
-import com.crud.tasks.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
