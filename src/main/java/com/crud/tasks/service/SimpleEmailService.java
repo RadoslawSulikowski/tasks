@@ -51,4 +51,15 @@ public class SimpleEmailService {
             LOGGER.error("Failed to process email sending: " + e.getMessage(), e);
         }
     }
+
+    public void sendSMM(final Mail mail) {
+        LOGGER.info("Starting email preparation...");
+        try {
+            SimpleMailMessage mailMessage = createMailMessage(mail);
+            javaMailSender.send(mailMessage);
+            LOGGER.info("Email has been sent.");
+        } catch(MailException e) {
+            LOGGER.error("Failed to process email sending: " + e.getMessage(), e);
+        }
+    }
 }

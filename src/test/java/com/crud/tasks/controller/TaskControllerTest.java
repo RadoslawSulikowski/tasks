@@ -43,7 +43,7 @@ public class TaskControllerTest {
         when(taskFacade.getTasks()).thenReturn(tasks);
 
         //When & Then
-        mockMvc.perform(get("/v1/task/getTasks").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/tasks").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -58,9 +58,7 @@ public class TaskControllerTest {
         when(taskFacade.getTask(1L)).thenReturn(taskDto);
 
         //When & Then
-        mockMvc.perform(get("/v1/task/getTask")
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("taskId", "1"))
+        mockMvc.perform(get("/v1/tasks/1"))
                 .andExpect(status().isOk());
     }
 
@@ -70,9 +68,7 @@ public class TaskControllerTest {
         when(taskFacade.getTask(anyLong())).thenThrow(new TaskNotFoundException());
 
         //When & Then
-        mockMvc.perform(get("/v1/task/getTask")
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("taskId", "1"))
+        mockMvc.perform(get("/v1/tasks/1"))
                 .andExpect(status().is(404))
                 .andExpect(status().reason("Task with given id doesn't exist!"));
     }
@@ -82,9 +78,7 @@ public class TaskControllerTest {
         //Given
         doNothing().when(taskFacade).deleteTask(anyLong());
         //When & Then
-        mockMvc.perform(delete("/v1/task/deleteTask")
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("taskId", "1"))
+        mockMvc.perform(delete("/v1/tasks/1"))
                 .andExpect(status().is(204))
                 .andExpect(status().reason("Task successful deleted"));
     }
@@ -95,9 +89,8 @@ public class TaskControllerTest {
         doThrow(new TaskNotFoundException()).when(taskFacade).deleteTask(anyLong());
 
         //When & Then
-        mockMvc.perform(delete("/v1/task/deleteTask")
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("taskId", "1"))
+        mockMvc.perform(delete("/v1/tasks/1")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(404))
                 .andExpect(status().reason("Task with given id doesn't exist!"));
     }
@@ -111,7 +104,7 @@ public class TaskControllerTest {
         String jsonContent = gson.toJson(updatedTask);
 
         //When & Then
-        mockMvc.perform(put("/v1/task/updateTask")
+        mockMvc.perform(put("/v1/tasks")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
@@ -130,7 +123,7 @@ public class TaskControllerTest {
         when(taskFacade.createTask(taskDto)).thenReturn(1L);
 
         //When & Then
-        mockMvc.perform(post("/v1/task/createTask")
+        mockMvc.perform(post("/v1/tasks")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
